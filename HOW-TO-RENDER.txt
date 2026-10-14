@@ -1,0 +1,27 @@
+THE SHEEP IN THE BOX - feature film project (Remotion + GSAP)
+
+What you need on your PC
+  1. Node.js 18 or newer (https://nodejs.org). Check with:  node -v
+
+First time only (in this folder, in a terminal / PowerShell)
+  npm install
+
+Render the whole film
+  node render-all.mjs
+  - Each scene is saved in the "out" folder as it finishes (Seq01.mp4, Seq02.mp4 ...).
+  - You can close it at any time. Run the same command again and it carries on
+    with the scenes that are not finished yet.
+  - At the end it joins all scenes into:  out\The_Sheep_in_the_Box_Feature.mp4
+
+Render only one scene
+  node render-all.mjs Seq05
+
+Look at the film live in the browser (no rendering)
+  npm run studio
+
+How it works
+  - src\seq01.js ... src\seq12b.js, src\credits.js : one file per scene. Each scene is a web page
+    (watercolour images + drawn characters). GSAP moves everything on a timeline.
+  - Remotion opens each frame in a hidden Chrome, takes a picture, and encodes the pictures to video.
+  - public\img : painted backgrounds and paper texture.  public\audio : the sound of each scene.
+  - sound\*.py : the Python scripts that made the sound files (you don't need them to render).

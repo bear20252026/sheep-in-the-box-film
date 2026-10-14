@@ -1,0 +1,26 @@
+import sys, numpy as np
+sys.path.insert(0, 'sound'); from sfx import *; from planet import *
+D = 150; M = Mix(D)
+space(M, D)
+flight(M, 0, 11); flight(M, 124, 24)
+M.add(thump(150, 0.2), 7.9, 0.15, 0.5); M.add(hop(), 11.2, 0.1, 0.6); M.add(thump(200, 0.15), 11.8, 0.12, 0.6)
+pad([['C4', 'E4', 'G4'], ['A3', 'C4', 'E4'], ['F3', 'A3', 'C4']], 0, 4, 0.04, M)
+musicbox(M, THEME, 1, 0.45, 0.035, 0.5)
+fanfare(M, 12.4, [('C5', 1), ('C5', 1), ('C5', 1), ('G5', 3)], 0.2, 0.09)
+for a in (22.2, 22.8, 23.4, 24.0): M.add(step(), a, 0.08, 0.5)
+fanfare(M, 32.6, [('G4', 1), ('C5', 1), ('E5', 1), ('G5', 2), ('E5', 1), ('G5', 3)], 0.18, 0.07)
+pad([['C4', 'E4', 'G4'], ['F3', 'A3', 'C4'], ['G3', 'B3', 'D4'], ['C4', 'E4', 'G4']], 14, 5, 0.03, M)
+fanfare(M, 54.4, [('C5', 1), ('E5', 1), ('G5', 1), ('C6', 3)], 0.2, 0.08)
+# tension: no music, a low drone and a heartbeat
+t = T(13); M.add(np.sin(2 * np.pi * 49 * t) * env(len(t), 2, 1) * 0.5, 58, 0.1, 0.5)
+pad([['D3', 'F3', 'A3'], ['C#3', 'E3', 'G3'], ['D3', 'F3', 'G#3']], 58.5, 4, 0.035, M)
+for k in range(8): M.add(thump(70, 0.2), 63 + k * 0.9, 0.12, 0.5)
+# "No." — silence, then the King's fanfare, flustered
+fanfare(M, 74.6, [('G4', 1), ('A4', 1), ('B4', 1), ('C5', 1), ('C5', 1), ('G5', 3)], 0.15, 0.08)
+musicbox(M, [('C5', .5), ('E5', .5), ('G5', .5), ('C6', 1.5)], 87.6, 0.3, 0.05, 0.5)
+pad([['C4', 'E4', 'G4'], ['A3', 'C4', 'E4'], ['F3', 'A3', 'C4'], ['G3', 'B3', 'D4']] * 2, 88, 4, 0.035, M)
+fanfare(M, 113.4, [('C5', 2), ('G4', 1), ('C5', 3)], 0.2, 0.07)
+pad([['F3', 'A3', 'C4', 'E4'], ['C4', 'E4', 'G4'], ['A3', 'C4', 'E4'], ['G3', 'C4', 'D4'], ['C4', 'E4', 'G4']], 120, 5, 0.045, M)
+musicbox(M, THEME, 126, 0.6, 0.045, 0.5)
+M.write(sys.argv[1], 1.5, 3.5)
+print('ok')
