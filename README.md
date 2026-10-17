@@ -29,3 +29,13 @@ node render-all.mjs Seq05      # one scene only
 npm run studio                 # watch it live in the browser
 ```
 See `HOW-TO-RENDER.txt` for the step-by-step version.
+
+## Rebuilding the films
+- **Feature (45 min):** the steps above. It takes roughly 10 hours on a 4-core machine (about 1 hour of rendering per 4 minutes of film).
+  On Linux, `--gl=swiftshader` and 3 parallel workers (`render/runq3.sh`) are the fastest setup.
+- **Original short:** `npm run render:film`.
+- `public/audio/part1.wav`, `part2.wav` and `part3.wav` are the short film's finished sound tracks. They are kept in git
+  because they were mixed from a song file (`our-corner.mp3` from the dream-gallery game) that is not in this repo,
+  and the feature's Seq03 and Seq04b sound reuses them.
+- `package-lock.json` pins the exact library versions used.
+- A rebuild gives the same film, but the file is not byte-for-byte identical (video encoding and library versions differ slightly).
